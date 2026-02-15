@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DadMood - Mood Tracker for New Dads</title>
+    <meta name="description" content="Daily mood check-ins, sleep tracking, and trend insights for new dads. Private, simple, free. Coming soon.">
+    <meta property="og:title" content="DadMood - Mood Tracker for New Dads">
+    <meta property="og:description" content="Daily mood check-ins, sleep tracking, and trend insights for new dads. Private, simple, free. Coming soon.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dadmood.33c.dev">
+    <meta property="og:image" content="https://dadmood.33c.dev/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🫂</text></svg>">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0F1117;
+            --bg-card: rgba(30, 27, 46, 0.55);
+            --bg-glass: rgba(99, 102, 241, 0.06);
+            --indigo: #6366F1;
+            --indigo-light: #818CF8;
+            --indigo-glow: rgba(99, 102, 241, 0.25);
+            --amber: #F59E0B;
+            --amber-glow: rgba(245, 158, 11, 0.25);
+            --white: #f0f0f5;
+            --white-70: rgba(240, 240, 245, 0.7);
+            --white-40: rgba(240, 240, 245, 0.4);
+            --white-10: rgba(240, 240, 245, 0.1);
+            --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; background: var(--bg); }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--white);
+            line-height: 1.65;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Ambient glow */
+        .glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(140px);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .glow--1 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%);
+            top: -100px; right: -80px;
+            animation: float 22s ease-in-out infinite alternate;
+        }
+        .glow--2 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%);
+            bottom: 10%; left: -120px;
+            animation: float 18s ease-in-out infinite alternate-reverse;
+        }
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, -25px) scale(1.08); }
+        }
+
+        .container { max-width: 960px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+        section { position: relative; z-index: 1; }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0; transform: translateY(28px);
+            transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-d1 { transition-delay: 0.1s; }
+        .reveal-d2 { transition-delay: 0.2s; }
+        .reveal-d3 { transition-delay: 0.3s; }
+        .reveal-d4 { transition-delay: 0.4s; }
+
+        /* Nav */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 14px 0; transition: background 0.3s, backdrop-filter 0.3s;
+        }
+        nav.scrolled {
+            background: rgba(15, 17, 23, 0.88);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--white-10);
+        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo {
+            display: flex; align-items: center; gap: 8px;
+            text-decoration: none; color: var(--white); font-size: 18px; font-weight: 700;
+        }
+        .nav-logo .accent { color: var(--indigo-light); }
+        .nav-cta {
+            padding: 8px 18px; background: var(--amber); color: #1a1a2e;
+            border: none; border-radius: 8px; font-size: 14px; font-weight: 600;
+            text-decoration: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 18px var(--amber-glow); }
+
+        /* Hero */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px; text-align: center; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 6px 14px; background: var(--white-10); border: 1px solid var(--white-10);
+            border-radius: 100px; font-size: 13px; color: var(--indigo-light); font-weight: 500; margin-bottom: 24px;
+        }
+        .hero-badge .dot {
+            width: 6px; height: 6px; background: var(--indigo); border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--indigo-glow); }
+            50% { opacity: 0.6; box-shadow: 0 0 0 6px transparent; }
+        }
+        .hero h1 {
+            font-size: clamp(34px, 5vw, 52px); font-weight: 800;
+            line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px;
+        }
+        .hero h1 .highlight { color: var(--indigo-light); }
+        .hero p { font-size: 18px; color: var(--white-70); max-width: 540px; margin: 0 auto 32px; }
+
+        /* Mood emojis */
+        .mood-row {
+            display: flex; justify-content: center; gap: 16px; margin-bottom: 36px;
+        }
+        .mood-emoji {
+            font-size: 36px; animation: bob 3s ease-in-out infinite;
+            filter: grayscale(0.1);
+        }
+        .mood-emoji:nth-child(1) { animation-delay: 0s; }
+        .mood-emoji:nth-child(2) { animation-delay: 0.3s; }
+        .mood-emoji:nth-child(3) { animation-delay: 0.6s; }
+        .mood-emoji:nth-child(4) { animation-delay: 0.9s; }
+        .mood-emoji:nth-child(5) { animation-delay: 1.2s; }
+        @keyframes bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .cta-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary {
+            padding: 14px 28px; background: var(--amber); color: #1a1a2e;
+            border: none; border-radius: 10px; font-size: 16px; font-weight: 700;
+            text-decoration: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 24px var(--amber-glow); }
+        .btn-outline {
+            padding: 14px 28px; background: transparent; color: var(--white);
+            border: 1px solid var(--white-40); border-radius: 10px; font-size: 16px; font-weight: 600;
+            text-decoration: none; cursor: pointer; transition: border-color 0.2s;
+        }
+        .btn-outline:hover { border-color: var(--indigo-light); color: var(--indigo-light); }
+        .hero-sub { font-size: 13px; color: var(--white-40); margin-top: 20px; }
+
+        /* Features */
+        .features { padding: 100px 0; }
+        .section-label {
+            font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--indigo-light); font-weight: 600; margin-bottom: 12px;
+        }
+        .section-title {
+            font-size: clamp(26px, 3.5vw, 38px); font-weight: 700;
+            letter-spacing: -0.02em; margin-bottom: 48px; line-height: 1.2;
+        }
+        .feature-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;
+        }
+        .feature-card {
+            background: var(--bg-card); border: 1px solid var(--white-10);
+            border-radius: 14px; padding: 28px; transition: border-color 0.3s, transform 0.3s;
+        }
+        .feature-card:hover { border-color: var(--indigo); transform: translateY(-3px); }
+        .feature-icon {
+            width: 44px; height: 44px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; margin-bottom: 16px;
+        }
+        .feature-icon--checkin { background: rgba(99, 102, 241, 0.15); }
+        .feature-icon--trends { background: rgba(245, 158, 11, 0.15); }
+        .feature-icon--wins { background: rgba(34, 197, 94, 0.15); }
+        .feature-icon--private { background: rgba(99, 102, 241, 0.15); }
+        .feature-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+        .feature-card p { font-size: 14px; color: var(--white-70); line-height: 1.6; }
+
+        /* Why it matters */
+        .why { padding: 80px 0; }
+        .why-box {
+            background: var(--bg-card); border: 1px solid var(--white-10);
+            border-radius: 18px; padding: 48px; max-width: 680px; margin: 0 auto;
+        }
+        .why-stat {
+            font-size: clamp(22px, 3vw, 30px); font-weight: 700;
+            line-height: 1.3; margin-bottom: 20px; letter-spacing: -0.02em;
+        }
+        .why-stat .num { color: var(--amber); }
+        .why-box p { font-size: 16px; color: var(--white-70); margin-bottom: 16px; line-height: 1.7; }
+        .why-box p:last-child { margin-bottom: 0; }
+        .why-note {
+            font-size: 13px; color: var(--white-40); border-top: 1px solid var(--white-10);
+            padding-top: 16px; margin-top: 20px;
+        }
+
+        /* Waitlist */
+        .waitlist { padding: 80px 0 100px; text-align: center; }
+        .waitlist-card {
+            background: linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(245,158,11,0.06) 100%);
+            border: 1px solid var(--white-10); border-radius: 18px;
+            padding: 48px 32px; max-width: 520px; margin: 0 auto;
+        }
+        .waitlist-card h2 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+        .waitlist-card p { color: var(--white-70); margin-bottom: 24px; font-size: 15px; }
+        .waitlist-form { display: flex; gap: 10px; max-width: 400px; margin: 0 auto; }
+        .waitlist-form input {
+            flex: 1; padding: 12px 16px; background: rgba(15, 17, 23, 0.8);
+            border: 1px solid var(--white-10); border-radius: 8px;
+            color: var(--white); font-size: 15px; font-family: var(--font);
+            outline: none; transition: border-color 0.2s;
+        }
+        .waitlist-form input:focus { border-color: var(--indigo); }
+        .waitlist-form input::placeholder { color: var(--white-40); }
+        .waitlist-form button {
+            padding: 12px 24px; background: var(--amber); color: #1a1a2e;
+            border: none; border-radius: 8px; font-size: 15px; font-weight: 700;
+            cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; white-space: nowrap;
+        }
+        .waitlist-form button:hover { transform: translateY(-1px); box-shadow: 0 4px 16px var(--amber-glow); }
+
+        /* Footer */
+        footer {
+            padding: 32px 0; border-top: 1px solid var(--white-10);
+            font-size: 13px; color: var(--white-40);
+        }
+        footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        footer a { color: var(--white-40); text-decoration: none; transition: color 0.2s; }
+        footer a:hover { color: var(--indigo-light); }
+        .footer-links { display: flex; gap: 20px; }
+
+        @media (max-width: 600px) {
+            .hero { padding: 100px 0 60px; }
+            .waitlist-form { flex-direction: column; }
+            .waitlist-form button { width: 100%; }
+            .why-box { padding: 32px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow glow--1"></div>
+    <div class="glow glow--2"></div>
+
+    <nav id="nav">
+        <div class="container">
+            <a href="#" class="nav-logo">🫂 Dad<span class="accent">Mood</span></a>
+            <a href="#waitlist" class="nav-cta">Join Waitlist</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="reveal">
+                <div class="hero-badge"><span class="dot"></span> Coming soon to iOS and Android</div>
+            </div>
+            <h1 class="reveal reveal-d1">Track How You're <span class="highlight">Really</span> Doing</h1>
+            <div class="mood-row reveal reveal-d2">
+                <span class="mood-emoji">😫</span>
+                <span class="mood-emoji">😔</span>
+                <span class="mood-emoji">😐</span>
+                <span class="mood-emoji">🙂</span>
+                <span class="mood-emoji">😄</span>
+            </div>
+            <p class="reveal reveal-d3">DadMood helps new dads check in with themselves. Quick daily mood tracking, sleep quality logging, and a private space to notice patterns before they become problems.</p>
+            <div class="cta-group reveal reveal-d4">
+                <a href="#waitlist" class="btn-primary">Join the Waitlist</a>
+                <a href="#features" class="btn-outline">Learn More</a>
+            </div>
+            <p class="hero-sub reveal reveal-d4">Free. Private. No account needed.</p>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-label reveal">Features</div>
+            <h2 class="section-title reveal reveal-d1">Built for the first year (and beyond)</h2>
+            <div class="feature-grid">
+                <div class="feature-card reveal reveal-d1">
+                    <div class="feature-icon feature-icon--checkin">📋</div>
+                    <h3>Daily Check-in</h3>
+                    <p>30 seconds. Pick your mood, rate your sleep, note a win. That's it.</p>
+                </div>
+                <div class="feature-card reveal reveal-d2">
+                    <div class="feature-icon feature-icon--trends">📈</div>
+                    <h3>Mood Trends</h3>
+                    <p>See patterns over weeks and months. Know when you're in a rough patch before it gets worse.</p>
+                </div>
+                <div class="feature-card reveal reveal-d3">
+                    <div class="feature-icon feature-icon--wins">🏆</div>
+                    <h3>Dad Wins</h3>
+                    <p>Log one good thing each day. Sounds small. Makes a big difference.</p>
+                </div>
+                <div class="feature-card reveal reveal-d4">
+                    <div class="feature-icon feature-icon--private">🔒</div>
+                    <h3>Private and Local</h3>
+                    <p>Everything stays on your phone. No accounts, no cloud, no tracking.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why" id="why">
+        <div class="container">
+            <div class="why-box reveal">
+                <div class="why-stat"><span class="num">1 in 10</span> new dads experience postnatal depression. Most never talk about it.</div>
+                <p>DadMood isn't therapy. It's a mirror. A way to notice how you're doing without making it a big deal.</p>
+                <p>Some weeks you're fine. Some weeks the sleep deprivation hits different. Having a record of that matters more than you'd think.</p>
+                <div class="why-note">Includes an optional PHQ-2 screener. It's a validated two-question check used by GPs. Not a diagnosis, just a signal.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="waitlist" id="waitlist">
+        <div class="container">
+            <div class="waitlist-card reveal">
+                <h2>Get Early Access</h2>
+                <p>Drop your email. We'll let you know when DadMood launches.</p>
+                <form class="waitlist-form" action="https://formspree.io/f/PLACEHOLDER" method="POST">
+                    <input type="email" name="email" placeholder="your@email.com" required>
+                    <button type="submit">Join</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <span>Built by Tom. &copy; 2026</span>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        // Nav scroll
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 40);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) t.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
