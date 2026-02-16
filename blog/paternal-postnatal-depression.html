@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paternal Postnatal Depression: What New Dads Should Know | DadMood</title>
+    <meta name="description" content="1 in 10 new dads experience postnatal depression. Here's what it looks like, why it gets missed, and what you can do about it.">
+    <meta property="og:title" content="Paternal Postnatal Depression: What New Dads Should Know">
+    <meta property="og:description" content="1 in 10 new dads experience postnatal depression. Here's what it looks like, why it gets missed, and what you can do about it.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://dadmood.33c.dev/blog/paternal-postnatal-depression">
+    <meta property="og:image" content="https://dadmood.33c.dev/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://dadmood.33c.dev/blog/paternal-postnatal-depression">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🫂</text></svg>">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0F1117;
+            --bg-card: rgba(30, 27, 46, 0.55);
+            --bg-glass: rgba(99, 102, 241, 0.06);
+            --indigo: #6366F1;
+            --indigo-light: #818CF8;
+            --indigo-glow: rgba(99, 102, 241, 0.25);
+            --amber: #F59E0B;
+            --amber-glow: rgba(245, 158, 11, 0.25);
+            --white: #f0f0f5;
+            --white-70: rgba(240, 240, 245, 0.7);
+            --white-40: rgba(240, 240, 245, 0.4);
+            --white-10: rgba(240, 240, 245, 0.1);
+            --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; background: var(--bg); }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--white);
+            line-height: 1.75;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(140px);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .glow--1 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
+            top: -100px; right: -80px;
+        }
+        .glow--2 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(245,158,11,0.04) 0%, transparent 70%);
+            bottom: 10%; left: -120px;
+        }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 14px 0;
+            background: rgba(15, 17, 23, 0.88);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--white-10);
+        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo {
+            display: flex; align-items: center; gap: 8px;
+            text-decoration: none; color: var(--white); font-size: 18px; font-weight: 700;
+        }
+        .nav-logo .accent { color: var(--indigo-light); }
+        .nav-cta {
+            padding: 8px 18px; background: var(--amber); color: #1a1a2e;
+            border: none; border-radius: 8px; font-size: 14px; font-weight: 600;
+            text-decoration: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 18px var(--amber-glow); }
+
+        .container { max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+        article {
+            padding: 120px 0 60px;
+        }
+
+        .breadcrumb {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 14px; color: var(--white-40); margin-bottom: 32px;
+        }
+        .breadcrumb a { color: var(--indigo-light); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        article h1 {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .article-meta {
+            font-size: 14px; color: var(--white-40); margin-bottom: 40px;
+            display: flex; align-items: center; gap: 12px;
+        }
+
+        article h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 48px 0 16px;
+            color: var(--white);
+        }
+
+        article p {
+            font-size: 17px;
+            color: var(--white-70);
+            margin-bottom: 20px;
+        }
+
+        article ul {
+            margin: 0 0 24px 20px;
+            color: var(--white-70);
+            font-size: 17px;
+        }
+        article ul li {
+            margin-bottom: 8px;
+        }
+
+        .callout {
+            background: var(--bg-card);
+            border-left: 3px solid var(--indigo);
+            padding: 20px 24px;
+            border-radius: 0 12px 12px 0;
+            margin: 32px 0;
+        }
+        .callout p { color: var(--white); margin-bottom: 0; font-size: 16px; }
+        .callout p + p { margin-top: 12px; }
+
+        .callout--warning {
+            border-left-color: var(--amber);
+            background: rgba(245, 158, 11, 0.06);
+        }
+
+        .stat-block {
+            text-align: center;
+            padding: 40px 24px;
+            margin: 40px 0;
+        }
+        .stat-block .number {
+            font-size: clamp(48px, 8vw, 72px);
+            font-weight: 800;
+            color: var(--indigo-light);
+            line-height: 1;
+        }
+        .stat-block .label {
+            font-size: 18px;
+            color: var(--white-70);
+            margin-top: 8px;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 60px 0;
+            margin-top: 40px;
+            border-top: 1px solid var(--white-10);
+        }
+        .cta-section h2 { margin-top: 0; }
+        .cta-section p { color: var(--white-40); max-width: 480px; margin: 0 auto 24px; }
+        .cta-btn {
+            display: inline-block;
+            padding: 14px 28px; background: var(--amber); color: #1a1a2e;
+            border: none; border-radius: 10px; font-size: 16px; font-weight: 700;
+            text-decoration: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px var(--amber-glow); }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--white-40);
+            font-size: 13px;
+            border-top: 1px solid var(--white-10);
+        }
+        footer a { color: var(--white-40); text-decoration: none; }
+        footer a:hover { color: var(--white); }
+
+        .related {
+            margin: 48px 0 0;
+            padding: 32px 0;
+            border-top: 1px solid var(--white-10);
+        }
+        .related h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; }
+        .related a {
+            display: block;
+            padding: 12px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--white-10);
+            border-radius: 10px;
+            color: var(--indigo-light);
+            text-decoration: none;
+            margin-bottom: 8px;
+            font-size: 15px;
+            transition: border-color 0.2s;
+        }
+        .related a:hover { border-color: var(--indigo); }
+        .related a span { display: block; color: var(--white-40); font-size: 13px; margin-top: 4px; }
+
+        @media (max-width: 640px) {
+            article { padding-top: 100px; }
+            .container { padding: 0 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow glow--1"></div>
+    <div class="glow glow--2"></div>
+
+    <nav>
+        <div class="container">
+            <a href="/" class="nav-logo">🫂 Dad<span class="accent">Mood</span></a>
+            <a href="/#waitlist" class="nav-cta">Join Waitlist</a>
+        </div>
+    </nav>
+
+    <article>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="/">DadMood</a> <span>/</span> <a href="/blog/">Blog</a> <span>/</span> <span>Paternal Postnatal Depression</span>
+            </div>
+
+            <h1>Paternal Postnatal Depression: What New Dads Should Know</h1>
+            <div class="article-meta">
+                <span>By Tom</span>
+                <span>|</span>
+                <span>February 2026</span>
+                <span>|</span>
+                <span>6 min read</span>
+            </div>
+
+            <p>most people know about postnatal depression in mums. makes sense, right? the physical recovery, the hormonal shifts, the sleep deprivation. it's well documented and (finally) well talked about.</p>
+
+            <p>but dads get it too. and almost nobody talks about that part.</p>
+
+            <div class="stat-block">
+                <div class="number">1 in 10</div>
+                <div class="label">new dads experience postnatal depression</div>
+            </div>
+
+            <p>that stat comes from research published in JAMA Pediatrics. some studies put it higher, around 1 in 4 when you include anxiety disorders. either way, it's not rare. it's extremely common. and it mostly goes unnoticed.</p>
+
+            <h2>What does it actually look like?</h2>
+
+            <p>here's the thing. postnatal depression in dads doesn't always look like "classic" depression. you might not feel sad. you might feel:</p>
+
+            <ul>
+                <li>irritable. short fuse over nothing</li>
+                <li>disconnected from the baby, or from your partner</li>
+                <li>exhausted but unable to sleep (even when the baby's down)</li>
+                <li>pulling away from friends or hobbies</li>
+                <li>drinking more than usual</li>
+                <li>working longer hours to avoid being home</li>
+                <li>a vague sense that you're failing at something you can't name</li>
+            </ul>
+
+            <p>none of those things scream "depression" on their own. they just feel like being a tired new dad. which is why it gets missed so often.</p>
+
+            <h2>Why it gets missed</h2>
+
+            <p>a few reasons stack up here.</p>
+
+            <p>first, there's no medical framework for it. mums get health visitor check-ins, GP screenings, midwife follow-ups. dads get asked "how's the baby?" and "is mum doing okay?" nobody asks how the dad is doing. not really.</p>
+
+            <p>second, the culture around it is still catching up. men are getting better at talking about mental health, sure. but when you're a new dad, the expectation is that you're meant to be the rock. the stable one. admitting you're struggling feels like it takes something away from your partner's experience.</p>
+
+            <p>third, the symptoms overlap with normal new-parent tiredness. so it's easy to explain it all away. "of course I'm tired, we have a newborn."</p>
+
+            <div class="callout">
+                <p>the problem isn't that dads are weak. the problem is that nobody's looking. there's no check-in, no screening, no system for catching it early. so dads just keep going until it gets bad enough that someone notices.</p>
+            </div>
+
+            <h2>What the research says</h2>
+
+            <p>paternal postnatal depression peaks between 3 and 6 months after birth. that's later than the maternal peak, which often makes it even harder to spot. by the time dad's struggling, the focus has moved on from the "newborn" phase.</p>
+
+            <p>the research also shows it has real effects on kids. dads with untreated depression interact less with their children, which affects language development, emotional regulation, and behaviour. this isn't about guilt. it's about understanding that your mental health matters for your whole family, not just for you.</p>
+
+            <p>the good news? it's treatable. the same approaches that work for maternal postnatal depression (talking therapy, sometimes medication, lifestyle changes, social support) work for dads too. the hard part is recognising it in the first place.</p>
+
+            <h2>The PHQ-2: a two-question screener</h2>
+
+            <p>there's a clinically validated screener called the PHQ-2 that takes about 10 seconds. it asks two questions:</p>
+
+            <div class="callout">
+                <p>1. Over the last two weeks, how often have you been bothered by little interest or pleasure in doing things?</p>
+                <p>2. Over the last two weeks, how often have you been bothered by feeling down, depressed, or hopeless?</p>
+            </div>
+
+            <p>that's it. two questions. if you score 3 or above (on a 0-6 scale), it suggests a full screening might be worth doing with your GP.</p>
+
+            <p>this isn't a diagnosis tool. it's a nudge. a way to notice something before it becomes a crisis.</p>
+
+            <h2>What you can actually do</h2>
+
+            <p>I'm not a doctor. this isn't medical advice. but from reading the research and talking to dads, a few things come up again and again:</p>
+
+            <ul>
+                <li><strong>notice it.</strong> that's the biggest step. just admitting "I'm not doing great" to yourself. you don't need to do anything dramatic. just notice.</li>
+                <li><strong>track it.</strong> keeping a simple record of your mood, even just picking an emoji each day, creates a pattern you can see. it's harder to dismiss a bad stretch when you can see it in black and white.</li>
+                <li><strong>talk to someone.</strong> doesn't have to be a therapist. a mate, your partner, your GP. the bar for "bad enough to talk about" is much lower than you think.</li>
+                <li><strong>protect your sleep.</strong> easier said than done with a newborn, I know. but sleep deprivation makes everything worse. even small improvements help.</li>
+                <li><strong>find one small win per day.</strong> changed a nappy without getting peed on? baby smiled at you? count it. seriously.</li>
+            </ul>
+
+            <h2>Why I built DadMood</h2>
+
+            <p>I built DadMood because I wished I'd had something like it. a way to check in with myself in 30 seconds, without it feeling like a Big Thing. not a therapy app. not a crisis line. just a mirror.</p>
+
+            <p>it tracks your mood, your sleep quality, and lets you log a daily win. over time, it shows you patterns. good stretches. rough patches. things you might not notice day to day.</p>
+
+            <p>everything stays on your phone. no accounts, no cloud sync, no tracking. it's your data, full stop.</p>
+
+            <div class="callout--warning callout">
+                <p><strong>If you're in crisis:</strong> Samaritans are available 24/7 on 116 123 (UK). PANDAS Foundation helpline: 0808 196 1776. You don't need to have it figured out to call.</p>
+            </div>
+
+            <div class="related">
+                <h3>More from the blog</h3>
+                <a href="/blog/why-track-your-mood">
+                    Why Tracking Your Mood as a New Dad Actually Helps
+                    <span>How simple daily check-ins make a real difference</span>
+                </a>
+            </div>
+
+            <div class="cta-section">
+                <h2>Get early access to DadMood</h2>
+                <p>30-second daily check-ins. Private. Free. Built for dads who want to keep an eye on how they're really doing.</p>
+                <a href="/#waitlist" class="cta-btn">Join the Waitlist</a>
+            </div>
+        </div>
+    </article>
+
+    <footer>
+        <div class="container">
+            <p>Built by Tom &nbsp;|&nbsp; <a href="/#privacy">Privacy</a> &nbsp;|&nbsp; <a href="/#terms">Terms</a> &nbsp;|&nbsp; &copy; 2026 DadMood</p>
+        </div>
+    </footer>
+</body>
+</html>

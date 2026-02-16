@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | DadMood - Mental Health Resources for New Dads</title>
+    <meta name="description" content="Articles about new dad mental health, mood tracking, and paternal postnatal depression. Written by Tom, the developer behind DadMood.">
+    <meta property="og:title" content="DadMood Blog - Mental Health for New Dads">
+    <meta property="og:description" content="Articles about new dad mental health, mood tracking, and paternal postnatal depression.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dadmood.33c.dev/blog/">
+    <meta property="og:image" content="https://dadmood.33c.dev/og-image.png">
+    <link rel="canonical" href="https://dadmood.33c.dev/blog/">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🫂</text></svg>">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0F1117;
+            --bg-card: rgba(30, 27, 46, 0.55);
+            --indigo: #6366F1;
+            --indigo-light: #818CF8;
+            --indigo-glow: rgba(99, 102, 241, 0.25);
+            --amber: #F59E0B;
+            --amber-glow: rgba(245, 158, 11, 0.25);
+            --white: #f0f0f5;
+            --white-70: rgba(240, 240, 245, 0.7);
+            --white-40: rgba(240, 240, 245, 0.4);
+            --white-10: rgba(240, 240, 245, 0.1);
+            --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; background: var(--bg); }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--white);
+            line-height: 1.65;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .glow {
+            position: fixed; border-radius: 50%; filter: blur(140px); z-index: 0; pointer-events: none;
+        }
+        .glow--1 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
+            top: -100px; right: -80px;
+        }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 14px 0;
+            background: rgba(15, 17, 23, 0.88);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--white-10);
+        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo {
+            display: flex; align-items: center; gap: 8px;
+            text-decoration: none; color: var(--white); font-size: 18px; font-weight: 700;
+        }
+        .nav-logo .accent { color: var(--indigo-light); }
+        .nav-cta {
+            padding: 8px 18px; background: var(--amber); color: #1a1a2e;
+            border: none; border-radius: 8px; font-size: 14px; font-weight: 600;
+            text-decoration: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 18px var(--amber-glow); }
+
+        .container { max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+        .blog-header {
+            padding: 140px 0 40px;
+            text-align: center;
+        }
+        .blog-header h1 {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
+        .blog-header p {
+            font-size: 17px;
+            color: var(--white-40);
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .blog-list { padding: 20px 0 80px; }
+
+        .blog-card {
+            display: block;
+            padding: 28px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--white-10);
+            border-radius: 14px;
+            color: var(--white);
+            text-decoration: none;
+            margin-bottom: 16px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .blog-card:hover {
+            border-color: var(--indigo);
+            transform: translateY(-2px);
+        }
+        .blog-card h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        .blog-card .excerpt {
+            font-size: 15px;
+            color: var(--white-70);
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        .blog-card .meta {
+            font-size: 13px;
+            color: var(--white-40);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .blog-card .tag {
+            background: var(--indigo-glow);
+            color: var(--indigo-light);
+            padding: 2px 10px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .reveal {
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-d1 { transition-delay: 0.1s; }
+        .reveal-d2 { transition-delay: 0.2s; }
+
+        footer {
+            text-align: center; padding: 40px 0; color: var(--white-40);
+            font-size: 13px; border-top: 1px solid var(--white-10);
+        }
+        footer a { color: var(--white-40); text-decoration: none; }
+        footer a:hover { color: var(--white); }
+
+        @media (max-width: 640px) {
+            .blog-header { padding-top: 110px; }
+            .container { padding: 0 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow glow--1"></div>
+
+    <nav>
+        <div class="container">
+            <a href="/" class="nav-logo">🫂 Dad<span class="accent">Mood</span></a>
+            <a href="/#waitlist" class="nav-cta">Join Waitlist</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="blog-header">
+            <h1>The DadMood Blog</h1>
+            <p>honest writing about being a new dad. mental health, mood tracking, and the stuff nobody warns you about.</p>
+        </div>
+
+        <div class="blog-list">
+            <a href="/blog/paternal-postnatal-depression" class="blog-card reveal">
+                <h2>Paternal Postnatal Depression: What New Dads Should Know</h2>
+                <p class="excerpt">1 in 10 new dads experience postnatal depression. most never talk about it. here's what it looks like, why it gets missed, and what you can do about it.</p>
+                <div class="meta">
+                    <span class="tag">Mental Health</span>
+                    <span>February 2026</span>
+                    <span>|</span>
+                    <span>6 min read</span>
+                </div>
+            </a>
+
+            <a href="/blog/why-track-your-mood" class="blog-card reveal reveal-d1">
+                <h2>Why Tracking Your Mood as a New Dad Actually Helps</h2>
+                <p class="excerpt">you don't need therapy. you need a mirror. why a 30-second daily mood check-in makes more difference than you'd expect.</p>
+                <div class="meta">
+                    <span class="tag">Mood Tracking</span>
+                    <span>February 2026</span>
+                    <span>|</span>
+                    <span>5 min read</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Built by Tom &nbsp;|&nbsp; <a href="/#privacy">Privacy</a> &nbsp;|&nbsp; <a href="/#terms">Terms</a> &nbsp;|&nbsp; &copy; 2026 DadMood</p>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

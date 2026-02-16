@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Tracking Your Mood as a New Dad Actually Helps | DadMood</title>
+    <meta name="description" content="You don't need therapy. You need a mirror. Why a 30-second daily mood check-in makes more difference than you'd expect.">
+    <meta property="og:title" content="Why Tracking Your Mood as a New Dad Actually Helps">
+    <meta property="og:description" content="You don't need therapy. You need a mirror. Why a 30-second daily mood check-in makes more difference than you'd expect.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://dadmood.33c.dev/blog/why-track-your-mood">
+    <meta property="og:image" content="https://dadmood.33c.dev/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://dadmood.33c.dev/blog/why-track-your-mood">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🫂</text></svg>">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0F1117;
+            --bg-card: rgba(30, 27, 46, 0.55);
+            --bg-glass: rgba(99, 102, 241, 0.06);
+            --indigo: #6366F1;
+            --indigo-light: #818CF8;
+            --indigo-glow: rgba(99, 102, 241, 0.25);
+            --amber: #F59E0B;
+            --amber-glow: rgba(245, 158, 11, 0.25);
+            --white: #f0f0f5;
+            --white-70: rgba(240, 240, 245, 0.7);
+            --white-40: rgba(240, 240, 245, 0.4);
+            --white-10: rgba(240, 240, 245, 0.1);
+            --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; background: var(--bg); }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--white);
+            line-height: 1.75;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .glow {
+            position: fixed; border-radius: 50%; filter: blur(140px); z-index: 0; pointer-events: none;
+        }
+        .glow--1 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
+            top: -100px; right: -80px;
+        }
+        .glow--2 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(245,158,11,0.04) 0%, transparent 70%);
+            bottom: 10%; left: -120px;
+        }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 14px 0;
+            background: rgba(15, 17, 23, 0.88);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--white-10);
+        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo {
+            display: flex; align-items: center; gap: 8px;
+            text-decoration: none; color: var(--white); font-size: 18px; font-weight: 700;
+        }
+        .nav-logo .accent { color: var(--indigo-light); }
+        .nav-cta {
+            padding: 8px 18px; background: var(--amber); color: #1a1a2e;
+            border: none; border-radius: 8px; font-size: 14px; font-weight: 600;
+            text-decoration: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 18px var(--amber-glow); }
+
+        .container { max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+        article { padding: 120px 0 60px; }
+
+        .breadcrumb {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 14px; color: var(--white-40); margin-bottom: 32px;
+        }
+        .breadcrumb a { color: var(--indigo-light); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        article h1 {
+            font-size: clamp(28px, 4vw, 40px); font-weight: 800;
+            line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 16px;
+        }
+
+        .article-meta {
+            font-size: 14px; color: var(--white-40); margin-bottom: 40px;
+            display: flex; align-items: center; gap: 12px;
+        }
+
+        article h2 {
+            font-size: 24px; font-weight: 700; margin: 48px 0 16px; color: var(--white);
+        }
+
+        article p { font-size: 17px; color: var(--white-70); margin-bottom: 20px; }
+
+        article ul { margin: 0 0 24px 20px; color: var(--white-70); font-size: 17px; }
+        article ul li { margin-bottom: 8px; }
+
+        .callout {
+            background: var(--bg-card);
+            border-left: 3px solid var(--indigo);
+            padding: 20px 24px;
+            border-radius: 0 12px 12px 0;
+            margin: 32px 0;
+        }
+        .callout p { color: var(--white); margin-bottom: 0; font-size: 16px; }
+        .callout p + p { margin-top: 12px; }
+
+        .step-list {
+            counter-reset: steps;
+            list-style: none;
+            margin: 24px 0;
+            padding: 0;
+        }
+        .step-list li {
+            counter-increment: steps;
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            color: var(--white-70);
+            font-size: 17px;
+        }
+        .step-list li::before {
+            content: counter(steps);
+            flex-shrink: 0;
+            width: 32px; height: 32px;
+            background: var(--indigo);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 14px;
+            margin-top: 2px;
+        }
+
+        .cta-section {
+            text-align: center; padding: 60px 0; margin-top: 40px;
+            border-top: 1px solid var(--white-10);
+        }
+        .cta-section h2 { margin-top: 0; }
+        .cta-section p { color: var(--white-40); max-width: 480px; margin: 0 auto 24px; }
+        .cta-btn {
+            display: inline-block;
+            padding: 14px 28px; background: var(--amber); color: #1a1a2e;
+            border: none; border-radius: 10px; font-size: 16px; font-weight: 700;
+            text-decoration: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px var(--amber-glow); }
+
+        .related {
+            margin: 48px 0 0; padding: 32px 0;
+            border-top: 1px solid var(--white-10);
+        }
+        .related h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; }
+        .related a {
+            display: block; padding: 12px 16px;
+            background: var(--bg-card); border: 1px solid var(--white-10);
+            border-radius: 10px; color: var(--indigo-light);
+            text-decoration: none; margin-bottom: 8px; font-size: 15px;
+            transition: border-color 0.2s;
+        }
+        .related a:hover { border-color: var(--indigo); }
+        .related a span { display: block; color: var(--white-40); font-size: 13px; margin-top: 4px; }
+
+        footer {
+            text-align: center; padding: 40px 0; color: var(--white-40);
+            font-size: 13px; border-top: 1px solid var(--white-10);
+        }
+        footer a { color: var(--white-40); text-decoration: none; }
+        footer a:hover { color: var(--white); }
+
+        @media (max-width: 640px) {
+            article { padding-top: 100px; }
+            .container { padding: 0 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow glow--1"></div>
+    <div class="glow glow--2"></div>
+
+    <nav>
+        <div class="container">
+            <a href="/" class="nav-logo">🫂 Dad<span class="accent">Mood</span></a>
+            <a href="/#waitlist" class="nav-cta">Join Waitlist</a>
+        </div>
+    </nav>
+
+    <article>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="/">DadMood</a> <span>/</span> <a href="/blog/">Blog</a> <span>/</span> <span>Why Track Your Mood</span>
+            </div>
+
+            <h1>Why Tracking Your Mood as a New Dad Actually Helps</h1>
+            <div class="article-meta">
+                <span>By Tom</span>
+                <span>|</span>
+                <span>February 2026</span>
+                <span>|</span>
+                <span>5 min read</span>
+            </div>
+
+            <p>I know what you're thinking. mood tracking sounds like something from a self-help book your mum gave you. journaling, gratitude lists, that whole thing.</p>
+
+            <p>fair enough. I thought the same. but then I had a kid and I went through a stretch where I felt terrible every day and didn't even realise it until my partner pointed it out.</p>
+
+            <p>the problem wasn't that I couldn't tell I was having a bad day. the problem was I couldn't tell I was having a bad <em>month</em>.</p>
+
+            <h2>The "I'm fine" problem</h2>
+
+            <p>humans are awful at tracking their own mood over time. we remember how we feel right now, and how we felt during big events. everything in between turns into mush.</p>
+
+            <p>when someone asks "how are you doing?" the honest answer for most new dads is "I don't know, actually." not because they're hiding it. because they genuinely can't tell. every day blurs into the next. feed, change, bounce, sleep (maybe), repeat.</p>
+
+            <p>mood tracking fixes this specific problem. it doesn't require insight or self-awareness. it just asks: how are you feeling right now? rate it. done. move on.</p>
+
+            <p>after a few weeks, you have data. and data tells a story that your day-to-day memory can't.</p>
+
+            <h2>What the research says</h2>
+
+            <p>there's a concept in psychology called "emotional awareness" and the research is pretty clear: just the act of labelling your emotion (even roughly) reduces its intensity. it's called "affect labelling" and it's been studied since the 1990s.</p>
+
+            <p>picking "😤 frustrated" from a list literally activates the part of your brain that helps regulate emotions. you're not just recording data. you're doing a tiny, almost invisible bit of emotional processing.</p>
+
+            <div class="callout">
+                <p>this isn't meditation. it's not therapy. it's picking an emoji once a day. the bar is intentionally low because the bar needs to be low when you haven't slept in three days.</p>
+            </div>
+
+            <h2>What tracking gives you</h2>
+
+            <p>after a couple of weeks of daily check-ins, you start seeing things:</p>
+
+            <ul>
+                <li><strong>patterns.</strong> maybe mondays are consistently bad. maybe your mood dips when the baby's not sleeping. maybe weekends are better than you thought. these patterns are invisible day-to-day.</li>
+                <li><strong>trends.</strong> a slow slide downward over three weeks is hard to notice while it's happening. but on a chart, it's obvious. and spotting it early means you can do something before it gets serious.</li>
+                <li><strong>wins.</strong> this is the one that surprised me. logging one good thing each day sounds like nothing. but scrolling back through a week of wins, even small ones, changes how you see that week. your brain remembers the bad stuff by default. the log corrects for that.</li>
+            </ul>
+
+            <h2>How to do it without it being a chore</h2>
+
+            <p>the number one reason people stop mood tracking is because it takes too long. that's why DadMood is built around a 30-second check-in. no paragraphs. no prompts. just:</p>
+
+            <ol class="step-list">
+                <li><strong>Pick your mood.</strong> One tap. Five options from great to awful.</li>
+                <li><strong>Rate your sleep.</strong> Slider from "what sleep?" to "actually ok."</li>
+                <li><strong>Log a win.</strong> One sentence. Optional but worth it.</li>
+            </ol>
+
+            <p>that's it. the whole thing. you can do it while holding the baby, while waiting for the kettle, while sitting in the car before going back inside.</p>
+
+            <p>the key is that it's fast enough that you'll actually do it. a 10-minute journaling session sounds lovely in theory. in practice, you'll do it twice and then forget.</p>
+
+            <h2>Sleep tracking matters more than you think</h2>
+
+            <p>sleep and mood are so tightly linked that separating them is almost pointless. but most mood trackers ignore sleep entirely.</p>
+
+            <p>when you track both side by side, you see the relationship clearly. maybe your worst days always follow your worst nights. that's useful information. it means the problem might not be "you", it might be sleep.</p>
+
+            <p>and sleep is something you can actually work on. splitting night duties differently, adjusting nap schedules, talking to your GP if it's really bad. but you need to see the pattern first.</p>
+
+            <h2>Why private matters</h2>
+
+            <p>DadMood keeps everything on your phone. no accounts, no cloud, no sharing. that's a deliberate choice.</p>
+
+            <p>if your mood data lives on someone else's server, there's always a nagging question: who else can see this? it changes what you're willing to record. you might soften your entries. rate yourself a 3 instead of a 1 because what if someone reads it.</p>
+
+            <p>local-only means it's genuinely just for you. no one will ever see it unless you choose to show them. that matters when you're recording how you really feel, not how you think you should feel.</p>
+
+            <div class="related">
+                <h3>More from the blog</h3>
+                <a href="/blog/paternal-postnatal-depression">
+                    Paternal Postnatal Depression: What New Dads Should Know
+                    <span>1 in 10 new dads experience it. Here's what to look for.</span>
+                </a>
+            </div>
+
+            <div class="cta-section">
+                <h2>Try DadMood when it launches</h2>
+                <p>30-second check-ins. Mood trends over time. Everything private, everything on your phone.</p>
+                <a href="/#waitlist" class="cta-btn">Join the Waitlist</a>
+            </div>
+        </div>
+    </article>
+
+    <footer>
+        <div class="container">
+            <p>Built by Tom &nbsp;|&nbsp; <a href="/#privacy">Privacy</a> &nbsp;|&nbsp; <a href="/#terms">Terms</a> &nbsp;|&nbsp; &copy; 2026 DadMood</p>
+        </div>
+    </footer>
+</body>
+</html>
