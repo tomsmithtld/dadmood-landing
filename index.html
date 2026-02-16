@@ -328,10 +328,11 @@
             <div class="waitlist-card reveal">
                 <h2>Get Early Access</h2>
                 <p>Drop your email. We'll let you know when DadMood launches.</p>
-                <form class="waitlist-form" action="https://formspree.io/f/PLACEHOLDER" method="POST">
+                <form class="waitlist-form" id="waitlist-form">
                     <input type="email" name="email" placeholder="your@email.com" required>
                     <button type="submit">Join</button>
                 </form>
+                <p id="form-msg" style="display:none; margin-top:12px; font-size:0.9rem;"></p>
             </div>
         </div>
     </section>
@@ -366,6 +367,34 @@
                 const t = document.querySelector(a.getAttribute('href'));
                 if (t) t.scrollIntoView({ behavior: 'smooth' });
             });
+        });
+        // Waitlist form
+        document.getElementById('waitlist-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const msg = document.getElementById('form-msg');
+            const email = e.target.email.value;
+            btn.disabled = true; btn.textContent = '...';
+            try {
+                const res = await fetch('https://waitlist.33c.dev/api/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, app: 'dadmood' })
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    msg.style.display = 'block'; msg.style.color = '#4ade80';
+                    msg.textContent = 'You are on the list. We will be in touch.';
+                    e.target.email.value = '';
+                } else {
+                    msg.style.display = 'block'; msg.style.color = '#f87171';
+                    msg.textContent = data.error || 'Something went wrong. Try again.';
+                }
+            } catch {
+                msg.style.display = 'block'; msg.style.color = '#f87171';
+                msg.textContent = 'Network error. Try again.';
+            }
+            btn.disabled = false; btn.textContent = 'Join';
         });
     </script>
 </body>
